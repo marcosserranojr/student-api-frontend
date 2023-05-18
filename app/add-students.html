@@ -4,22 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a518e20741.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/student-api.css">
+    <script src="js/student-api.js" defer></script>
     <title>Document</title>
 </head>
 <body>
     <header>
         <div class="header"><img src="/images/vapo-logo.png" alt="VAPO"></div>           
     </header>
-    <nav class="navigation">      
-        <a class="navItems" href="view-students.html">Home</a>
-        <a class="navItems" href="add-students.html">Add Students</a>
-        <a class="navItems" href="#contact">Contact</a>     
+    <nav>      
+        <a class="active" href="#"><i class="fa fa-fw fa-home"></i> Home</a> 
+        <a href="view-students.html"><i class="fa fa-fw fa-users"></i> Students</a> 
+        <a href="add-students.html"><i class="fa fa-fw fa-envelope"></i> Register</a> 
+        <a href="#"><i class="fa fa-fw fa-user"></i> Login</a>      
     </nav> 
     <main>
         <div class="main">
             <div class="heading">
-                <h3>Add a Student</h3>
+                <h3>Register a Student</h3>
             </div>
             <div style="padding: 1em;">
                 <form id="form" method="post" class="form">
@@ -42,7 +45,6 @@
     </main> 
     <footer class="footer">
         <a style="color: white; padding-left: 1em;" href="http://studentapi-team-one.apps.vapo-aws-sbx.va.gov/student">Student API</a>
-    </footer> 
-    <script src="js/student-api.js"></script>  
+    </footer>     
 </body>
 </html>

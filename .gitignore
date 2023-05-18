@@ -11,6 +11,8 @@
 # Built Visual Studio Code Extensions
 *.vsix
 
-.app/js/test.js
+app/js/test.js
 
-.app/test.html
+app/test.html
+
+css/test.css
