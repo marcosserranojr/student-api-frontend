@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/student-api.css">
+    <title>Document</title>
+</head>
+<body>
+    <button id="view" type="button" style="height: 80px; width: 100px; align-items: center; background-color: rgb(8, 39, 241); color: aliceblue; border-radius: 20%;">View</button> 
+    <table id="table" style="border:1px solid black">
+        <thead>
+            <tr id="theadTr"></tr>
+        </thead>
+        <tbody id="tbStudent" style="border:1px solid black"></tbody> 
+    </table>
+
+    <button id="add" type="button" style="height: 80px; width: 100px; align-items: center; background-color: rgb(8, 39, 241); color: aliceblue; border-radius: 20%;">Submit</button> 
+    <div style="padding: 1em;">
+        <form id="form" method="post" class="form">
+            <label for="firstName">First Name</label>
+            <div><input type="text" id="firstName" name="firstName"></div>
+            <label>Last Name</label>
+            <div><input type="text" id="lastName" name="lastName"></div>
+            <label for="studentEmail">Email</label>
+            <div><input type="email" id="studentEmail" name="email"></div>
+            <label for="dob">Date of Birth</label>
+            <div><input type="date" id="dob" name="dob"></div>
+            <div style="padding: 1em;"><input type="submit" value="Add Student"></div>
+        </form>        
+    <div>
+    <footer class="footer">
+        <a style="color: white; padding-left: 1em;" href="http://studentapi-team-one.apps.vapo-aws-sbx.va.gov/student">Student API</a>
+    </footer> 
+   
+    <script src="js/test.js"></script>   
+</body>
+</html>

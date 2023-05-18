@@ -1,0 +1,114 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html{ background: rgb(136, 195, 247); /* rgb(28, 39, 138);*/
+    height: 100vh;
+    border: .5px white; }
+body{
+   background: rgb(136, 195, 247); /* rgb(28, 39, 138);*/
+   height: 100vh;
+   border: .5px white;      
+
+}
+.header{
+    border-bottom: .2em white solid;    
+    background-color:rgb(30, 30, 182);
+    padding:1em;  
+    width: 100vw; 
+
+}
+.navigation{
+    border-bottom: .2em white solid;
+    padding: 1em;
+    width: 100vw;
+}
+.navItems{
+    padding-right: 5em; 
+    font-size:1.5em;
+}
+/*Footer is fixed to the bottom of page*/
+.footer{       
+  
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(30, 30, 182);
+    text-align: Left;
+    border-top: .1em white solid;
+
+}
+.main{
+    
+    display:flex;
+    width: 100vw;   
+    
+}
+
+.heading{
+    color: black;    
+    display: flex;
+    align-items:flex-start;
+    gap: 1em;
+    padding: 1em;    
+    /*height: 75vh;*/
+    border-right: .1em white solid;
+}
+h3,label, input{
+    font-size: 1.0em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    letter-spacing: .05em;
+    text-shadow: 0 0 15px rgba(0,0,0,0.5);
+    
+}
+.studentView{
+    background-color:ghostwhite;
+    padding: 0;
+    max-width: max-content;
+    margin: 2%;    
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+.tblStudents{
+    width: max-content;
+    background-color:aliceblue;
+
+}
+td, th{
+    border: 1px solid black;
+    padding: auto;
+    font-size: large;
+}
+
+.button{
+    background-color: rgb(64, 64, 112);
+    color: wheat;
+    font-size: 18px;
+    text-align: center;    
+    border-radius: 5px;
+    border-color:rgb(58, 139, 211);
+    padding-left: 1em;
+    padding-right: 1em;  
+}
+.button:hover{
+    background-color: blue;   
+}   
+
+.form{    
+    background-color:ghostwhite;
+    padding: .5em;    
+    margin: 1%;    
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    display: flexbox;
+    font-size: 18px;
+    text-decoration:forestgreen;
+
+}
+
+

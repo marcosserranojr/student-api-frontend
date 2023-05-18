@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/student-api.css">   
+    <script src="https://kit.fontawesome.com/a518e20741.js" crossorigin="anonymous"></script>
+    <script src="js/student-api.js" defer></script>
+    <title>Students</title>
+</head>
+<body>
+    <header>
+        <div class="header"><img style="width:auto" src="/images/vapo-logo.png" alt="VAPO"></div>           
+    </header>
+    <nav class="navigation">
+        <a class="navItems" href="view-students.html">Home</a>
+        <a class="navItems" href="add-students.html">Add Students</a>
+        <a class="navItems" href="#contact">Contact</a>       
+    </nav> 
+    <main class="main" > 
+        <div class="heading">
+            <h3>View Registered Students</h3>
+            <button id="view" type="button" class="button">View</button> 
+        </div>
+        <div style="width: 100vw;">
+            <div class="studentView">
+                <table id="table" class="tblStudents">
+                    <thead>
+                        <tr id="theadTr"></tr>
+                    </thead>
+                    <tbody id="tbStudent"></tbody>       
+                </table>  
+            </div>          
+        </div>                
+    </main>
+    <footer class="footer">
+        <a style="color: white; padding-left: 1em;" href="http://studentapi-team-one.apps.vapo-aws-sbx.va.gov/student">Student API</a>
+    </footer>   
+       
+</body>
+</html>
