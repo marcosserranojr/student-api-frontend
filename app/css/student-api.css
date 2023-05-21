@@ -88,16 +88,19 @@ label, input{
 
 .studentView{
     background-color:ghostwhite;
-    width: max-content;    
+    width: max-content; 
+    min-height: 1em;   
     border-radius: 5px;
     box-shadow: 0 0 15px rgba(0,0,0,0.5);
     padding-bottom: 1.5em;
+    overflow:auto;
+    height:15em ;
      
 }
 
 .tblStudents{    
     min-width: auto;
-    background-color:aliceblue;    
+    background-color:aliceblue;   
 
 }
 td, th{

@@ -1,5 +1,4 @@
 const studentAPIURL = 'http://studentapi-team-one.apps.vapo-aws-sbx.va.gov/student';
-
 class Student{
     constructor(id,fname,lname,email,age,dob)
     {        
@@ -10,42 +9,85 @@ class Student{
         this.Age = age;
         this.dob = dob;
     }
-}
-
+};
+//Instantiation of class
 const student = new Student();
-
+//Global Vairables
+let apiMethod ={};
+let navIndex=0;
+//Defined HTML Elements
 const btnViewEl = document.querySelector('#view');
 const formEl = document.getElementById("form");
+const viewEl = document.querySelector("#tblDiv");
+const mainEl = document.querySelector("main");
+const navEl = document.querySelector("nav");
+//Defined HTML content
+const studentPageHTML = `
+    <div class="heading"><h3>View Registered Students</h3>
+        <button id="view" type="button" class="button">View</button> 
+    </div>
+    <div>
+        <table id="table" class="tblStudents">
+            <thead>
+                <tr id="theadTr"></tr>
+            </thead>
+            <tbody id="tbStudent"></tbody>       
+        </table>  
+    </div> `;  
+const registerPageHTML =`
+    <div class="main">
+        <div class="heading">
+            <h3>Register a Student</h3>
+        </div>
+        <div style="padding: 1em;">
+            <form id="form" method="post" class="form">
+                <label for="firstName">First Name</label>
+                <div><input type="text" id="firstName" name="firstName"></div>
+                <label>Last Name</label>
+                <div><input type="text" id="lastName" name="lastName"></div>
+                <label for="studentEmail">Email</label>
+                <div><input type="email" id="studentEmail" name="email"></div>
+                <label for="dob">Date of Birth</label>
+                <div><input type="date" id="dob" name="dob"></div>
+                <div style="padding: 1em;"><input type="submit" value="Add Student"></div>
+            </form>            
+        <div>
+        <h3 id="statMsg"></h3> `;
+//FUNCTIONS USED
 
-
-function clickViewStudents(){  
-
-    const viewStudents = async () =>{
-        console.log("process data")
+//Function uses fetch to retriece api data and works
+//for both GET and POST
+const apiCall = async (url, apiMeth,type) =>{        
         try{
-            const response = await fetch(studentAPIURL);
-            let data = await response.json();
-
+           const response = await fetch(url,apiMeth);                     
+            let data = (type='get' ? await response.json() : response.status);             
             if (!response.ok){
                 console.log(data.description);
                 return;
             }
-            return data;
-            
+            return data;            
         }
         catch(error){
             console.log(error);
-        }      
+        } 
+};
+//Click event retrieve registered students
+function clickViewStudents(){     
+    
+    const tbStudentEl_Length = (viewEl.querySelector("#tbStudent").children.length);
+    viewEl.classList.add("studentView");
 
-    };
+    if(tbStudentEl_Length<=0) //Ensures table is created once only
+    {
+        let type="get";
+        apiCall(studentAPIURL, apiMethod, type).then(data => { 
 
-    viewStudents().then(data=>{
-
-        let index = data.length;  
+            let index = data.length;  
+            
         
-        //For each student fetched create a new object
-        //of type student
-        for (let i=0; i<index;i++){
+            //For each student fetched create a new object
+            //of type student
+            for (let i=0; i<index;i++){
 
             const student = new Student(
                 data[i].id,
@@ -72,49 +114,32 @@ function clickViewStudents(){
                 let tdEl = document.createElement('td');
                 tdEl.textContent = stuVal;
                 document.getElementById("tr"+[i]).appendChild(tdEl);
-
+            }
             }
 
-        }
-
-        //Create Table Headings based on each property in the class
-        for (var idx in student)
-        {
+            //Create Table Headings based on each property in the class
+            for (var idx in student){
             let thEl = document.createElement('th');
             thEl.textContent=idx;
             document.getElementById("theadTr").appendChild(thEl);
-        }
-    })
-}
-
+            }
+        })
+    }
+};
+//Submit functions register a new student
 function submitAddStudent(event){
     event.preventDefault();
     const myFormData = new FormData(event.target);
-    const formDataObj = Object.fromEntries(myFormData.entries());    
+    const formDataObj = Object.fromEntries(myFormData.entries());  
     
-   
-    const addStudents = async () =>{        
-        try{
-            const response = await fetch(studentAPIURL,{
-                method:'POST',
-                headers:{'Content-Type':'application/json'},
-                body: JSON.stringify(formDataObj)
-            });
-             
-             let data =  response.status;     
+    
+    let type="post";
+    apiMethod={method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify(formDataObj)};
 
-            if (!response.ok){
-                console.log(data.description);
-                return;
-            }
-            return data;            
-        }
-        catch(error){
-            console.log(error);
-        } 
-    };
+    apiCall(studentAPIURL, apiMethod,type).then(data => {console.log(data); });    
 
-    addStudents().then(data=>{console.log(data); }); 
     document.getElementById("form").reset();
 
     if (data ='200'){
@@ -123,59 +148,33 @@ function submitAddStudent(event){
         document.getElementById("statMsg").appendChild(pEL);
     }
     
-}
-
-
-    let path = window.location.pathname;
-    let page = path.split("/").pop();
-    if(page=="view-students.html")
+};
+const navChildClick=(event) =>{
+    navIndex = Array.prototype.indexOf.call(navEl.children, event.target);
+    if (navIndex==1)
     {
-        btnViewEl.addEventListener('click', clickViewStudents);
+        mainEl.innerHTML = null;
+        console.log ("search clicked")
+        mainEl.insertAdjacentHTML('afterbegin', studentPageHTML);
     }
-    if (page== "add-students.html")
+    if (navIndex==2)
     {
-        formEl.addEventListener('submit', submitAddStudent);        
-        
+        mainEl.innerHTML=null;
+        console.log(" register clicked");       
+        mainEl.insertAdjacentHTML('afterbegin', registerPageHTML);
     }
-
-
-
-
-
-
-
-
-//btnEl.addEventListener('click', viewStudents);
-
-/*
-
-var formEl = document.getElementById('form');
-//formEl.addEventListener('submit', event =>{
-   // event.preventDefault(); //Prevents old default form way to submitt
-
-//})
-formEl.addEventListener('submit', function(e){
-    e.preventDefault()
-
-    let fname = document.getElementById('firstName').value;
-    let lname = document.getElementById('lastName').value;
-    let email = document.getElementById('studentEmail').value;
-    let dob = document.getElementById('dob').value;
-
-    fetch(studentAPIURL,{
-        method:'POST',
-        body: JSON.stringify({firstName:fname, lastName:lname,email:email,dob:dob}),
-        headers:{'Content-type':'application/json; charset=UTF-8',}
-    })
-    .then(function(response){
-        return response.json()
-    })
-    .then(function(data){
-        console.log(data)
+};
+//let path = window.location.pathname;
+//let page = path.split("/").pop();
+//if(page=="view-students.html")
+//{    
+   // btnViewEl.addEventListener('click', clickViewStudents);
+//}
+//if (page== "add-students.html")
+//{
+   // formEl.addEventListener('submit', submitAddStudent);      
         
-    }).catch(error => console.error('Error:', error ));
-
-});
-
-
-*/
+//}
+navEl.addEventListener('click' , navChildClick);
+if (navIndex==1){btnViewEl.addEventListener('click', clickViewStudents);};
+if (navIndex==2){formEl.addEventListener('submit', submitAddStudent);};

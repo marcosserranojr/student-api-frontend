@@ -16,3 +16,5 @@ app/js/test.js
 app/test.html
 
 app/css/test.css
+
+app/html/*.html
