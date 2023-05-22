@@ -15,10 +15,7 @@ const student = new Student();
 //Global Vairables
 let apiMethod ={};
 let navIndex=0;
-//Defined HTML Elements
-const btnViewEl = document.querySelector('#view');
-const formEl = document.getElementById("form");
-const viewEl = document.querySelector("#tblDiv");
+//Global Defined HTML Elements
 const mainEl = document.querySelector("main");
 const navEl = document.querySelector("nav");
 //Defined HTML content
@@ -26,14 +23,13 @@ const studentPageHTML = `
     <div class="heading"><h3>View Registered Students</h3>
         <button id="view" type="button" class="button">View</button> 
     </div>
-    <div>
+    <div id=tblDiv>
         <table id="table" class="tblStudents">
             <thead>
                 <tr id="theadTr"></tr>
             </thead>
             <tbody id="tbStudent"></tbody>       
-        </table>  
-    </div> `;  
+        </table></div>`;  
 const registerPageHTML =`
     <div class="main">
         <div class="heading">
@@ -51,9 +47,30 @@ const registerPageHTML =`
                 <div><input type="date" id="dob" name="dob"></div>
                 <div style="padding: 1em;"><input type="submit" value="Add Student"></div>
             </form>            
-        <div>
-        <h3 id="statMsg"></h3> `;
+        <div><h3 id="statMsg"></h3>`;
 //FUNCTIONS USED
+
+const navChildClick=(event) =>{
+    navIndex = Array.prototype.indexOf.call(navEl.children, event.target);
+    if (navIndex==1)
+    {        
+        mainEl.innerHTML = null;
+        console.log ("Students Nav clicked")
+        mainEl.insertAdjacentHTML('afterbegin', studentPageHTML);
+        const btnViewEl = document.querySelector('#view');
+        btnViewEl.addEventListener('click', clickViewStudents);
+        
+    }
+    if (navIndex==2)
+    {
+        mainEl.innerHTML=null;
+        console.log("Register Nav clicked");       
+        mainEl.insertAdjacentHTML('afterbegin', registerPageHTML);
+        const formEl = document.getElementById("form");
+        formEl.addEventListener('submit', submitAddStudent);
+    }
+    if(navIndex==0 || navIndex==3){mainEl.innerHTML=null;}
+};
 
 //Function uses fetch to retriece api data and works
 //for both GET and POST
@@ -73,13 +90,15 @@ const apiCall = async (url, apiMeth,type) =>{
 };
 //Click event retrieve registered students
 function clickViewStudents(){     
-    
+    console.log("CLICK View Registered Students")
+    const viewEl = document.querySelector("#tblDiv");
     const tbStudentEl_Length = (viewEl.querySelector("#tbStudent").children.length);
     viewEl.classList.add("studentView");
 
     if(tbStudentEl_Length<=0) //Ensures table is created once only
     {
         let type="get";
+        apiMethod = null;
         apiCall(studentAPIURL, apiMethod, type).then(data => { 
 
             let index = data.length;  
@@ -145,36 +164,10 @@ function submitAddStudent(event){
     if (data ='200'){
         let pEL = document.createElement('p')
         pEL.textContent="Sudent Registered"
-        document.getElementById("statMsg").appendChild(pEL);
+        document.getElementById("statMsg").appendChild(pEL);        
     }
     
 };
-const navChildClick=(event) =>{
-    navIndex = Array.prototype.indexOf.call(navEl.children, event.target);
-    if (navIndex==1)
-    {
-        mainEl.innerHTML = null;
-        console.log ("search clicked")
-        mainEl.insertAdjacentHTML('afterbegin', studentPageHTML);
-    }
-    if (navIndex==2)
-    {
-        mainEl.innerHTML=null;
-        console.log(" register clicked");       
-        mainEl.insertAdjacentHTML('afterbegin', registerPageHTML);
-    }
-};
-//let path = window.location.pathname;
-//let page = path.split("/").pop();
-//if(page=="view-students.html")
-//{    
-   // btnViewEl.addEventListener('click', clickViewStudents);
-//}
-//if (page== "add-students.html")
-//{
-   // formEl.addEventListener('submit', submitAddStudent);      
-        
-//}
+
 navEl.addEventListener('click' , navChildClick);
-if (navIndex==1){btnViewEl.addEventListener('click', clickViewStudents);};
-if (navIndex==2){formEl.addEventListener('submit', submitAddStudent);};
+
