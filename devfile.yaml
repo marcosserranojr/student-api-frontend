@@ -17,7 +17,7 @@ components:
   - name: nginx
     container:
       image: registry.access.redhat.com/ubi8/nginx-120
-      sourceMapping: /projects
+      sourceMapping: ./
       memoryLimit: 512mi
       mountSources: true
       command:
