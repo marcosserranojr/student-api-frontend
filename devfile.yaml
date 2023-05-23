@@ -8,6 +8,7 @@ metadata:
   provider: custom
 projects:
   - name: frontend
+    clonePath: app/
     git: 
       remotes:
         origin: https://github.com/marcosserranojr/student-api-frontend.git
