@@ -1,0 +1,38 @@
+schemaVersion: 2.2.0
+metadata:
+  name: studentApi-frontend-WebApp
+  version: 1.0.0
+  description: Student API Frontend Web Application
+  projectType: Web App
+  language: JavaScript Html
+  provider: custom
+projects:
+  - name: frontend
+    git: 
+      remotes:
+        origin: https://github.com/marcosserranojr/student-api-frontend.git
+      checkoutFrom:
+        revision: main
+components:
+  - name: nginx
+    container:
+      image: registry.access.redhat.com/ubi8/nginx-120
+      sourceMapping: /projects
+      memoryLimit: 512mi
+      mountSources: true
+      command:
+        - nginx -g "daemon off;"
+      env:
+        - name: NGINX_VERSION
+          value: "1.20"
+        - name: NGINX_CONF_PATH
+          value: $(PROJECTS_ROOT)/configs/nginx.conf
+        - name: NGINX_DEFAULT_CONF_PATH
+          value: $(PROJECTS_ROOT)/configs/nginx-default-cfg/*.conf
+        - name: NGINX_CONFIGURATION_PATH
+          value: $(PROJECTS_ROOT)/configs/nginx-cfg/*.conf
+      endpoints:
+        - exposure: public
+          name: web
+          protocol: http
+          targetPort: 8080
