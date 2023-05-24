@@ -7,7 +7,7 @@ The repo consists of a sample front end application consiting of:
 
 The application uses fetch() to access data from an API via both GET and POST methods
 
-The API application acccessed resides in the **Student Demo** repo. That application consists of:
+The API application accessed resides in the **Student Demo** repo. That application consists of:
 
 - Spring Boot
 - Spring Data JPA
